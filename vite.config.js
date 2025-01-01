@@ -14,7 +14,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Modern PWA',
+        name: process.env.VITE_APP_NAME,
         short_name: 'PWA',
         theme_color: '#ffffff',
         icons: [

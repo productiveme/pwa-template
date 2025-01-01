@@ -48,8 +48,8 @@ async function setup() {
       ['content="Modern PWA with Preact"', `content="${answers.description}"`],
       ['content="#ffffff"', `content="${answers.primaryColor}"`],
     ],
+    '.env': [[`VITE_APP_NAME="Modern PWA"`, `VITE_APP_NAME="${answers.name}"`]],
     'vite.config.js': [
-      ['name: "Modern PWA"', `name: "${answers.name}"`],
       ['short_name: "PWA"', `short_name: "${answers.name}"`],
       ['theme_color: "#3b82f6"', `theme_color: "${answers.primaryColor}"`],
     ],

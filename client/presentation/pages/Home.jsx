@@ -1,4 +1,5 @@
 import { useQuery } from '@urql/preact'
+import { Link } from 'wouter'
 
 const POSTS_QUERY = `
   query GetPosts {
@@ -20,7 +21,11 @@ export const Home = () => {
     <div className="space-y-4">
       {data?.posts?.map(post => (
         <div key={post.id} className="card">
-          <h2 className="text-xl font-bold text-text">{post.title}</h2>
+          <Link to={`/post/${post.id}`}>
+            <h2 className="text-xl font-bold text-text hover:text-primary cursor-pointer">
+              {post.title}
+            </h2>
+          </Link>
         </div>
       ))}
     </div>

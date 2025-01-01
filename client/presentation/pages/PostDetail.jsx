@@ -1,6 +1,5 @@
 import { useQuery, useSubscription } from '@urql/preact'
 import { useEffect } from 'preact/hooks'
-import { useStore } from '../../domain/store'
 
 const POST_QUERY = `
   query GetPost($id: ID!) {
@@ -28,12 +27,12 @@ const COMMENT_SUBSCRIPTION = `
 export const PostDetail = ({ params }) => {
   const [result] = useQuery({
     query: POST_QUERY,
-    variables: { id: params.id }
+    variables: { id: params.id },
   })
 
   const [_, subscription] = useSubscription({
     query: COMMENT_SUBSCRIPTION,
-    variables: { postId: params.id }
+    variables: { postId: params.id },
   })
 
   const { data, fetching, error } = result
@@ -54,12 +53,15 @@ export const PostDetail = ({ params }) => {
     <div class="space-y-4">
       <h1 class="text-2xl font-bold">{post.title}</h1>
       <p class="text-gray-700">{post.content}</p>
-      
+
       <div class="mt-6">
         <h2 class="text-xl font-semibold">Comments</h2>
         <div class="space-y-2 mt-3">
           {post.comments.map(comment => (
-            <div key={comment.id} class="bg-gray-50 p-3 rounded">
+            <div
+              key={comment.id}
+              class="bg-gray-50 dark:bg-gray-700 p-3 rounded"
+            >
               {comment.text}
             </div>
           ))}
