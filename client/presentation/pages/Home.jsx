@@ -13,14 +13,14 @@ export const Home = () => {
   const [result] = useQuery({ query: POSTS_QUERY })
   const { data, fetching, error } = result
 
-  if (fetching) return <div>Loading...</div>
-  if (error) return <div>Error: {error.message}</div>
+  if (fetching) return <div className="text-text">Loading...</div>
+  if (error) return <div className="text-red-500">Error: {error.message}</div>
 
   return (
-    <div class="space-y-4">
+    <div className="space-y-4">
       {data?.posts?.map(post => (
-        <div key={post.id} class="bg-white p-4 rounded-lg shadow">
-          <h2 class="text-xl font-bold">{post.title}</h2>
+        <div key={post.id} className="card">
+          <h2 className="text-xl font-bold text-text">{post.title}</h2>
         </div>
       ))}
     </div>

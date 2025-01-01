@@ -1,15 +1,15 @@
 export const Layout = ({ children }) => (
-  <div class="min-h-screen bg-gray-100">
-    <nav class="bg-white shadow-lg">
-      <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between h-16">
-          <div class="flex">
-            {/* Add navigation items */}
+  <div className="min-h-screen bg-background">
+    <nav className="bg-background-card border-b border-border shadow-sm">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <span className="text-text font-semibold text-xl">App Name</span>
           </div>
         </div>
       </div>
     </nav>
-    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
       {children}
     </main>
   </div>
