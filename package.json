@@ -1,9 +1,9 @@
 {
-  "name": "yzerfontein-app",
+  "name": "modern-pwa",
   "private": true,
   "version": "0.0.0",
-  "description": "Yzerfontein Business Directory",
-  "author": "Jaco Swarts",
+  "description": "",
+  "author": "",
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",

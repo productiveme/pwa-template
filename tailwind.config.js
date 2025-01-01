@@ -1,21 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./client/index.html",
-    "./client/**/*.{js,jsx}"
-  ],
+  content: ['./client/index.html', './client/**/*.{js,jsx}'],
   darkMode: 'media', // automatically switches based on system preference
   theme: {
     extend: {
       colors: {
         // Light mode colors
         primary: {
-          DEFAULT: '#3b82f6', // blue-500
-          hover: '#2563eb', // blue-600
+          DEFAULT: '#3b82f6',
+        },
+        accent: {
+          DEFAULT: '#f43f5e', // Using a rose-500 color that works well with blue
         },
         secondary: {
-          DEFAULT: '#6b7280', // gray-500
-          hover: '#4b5563', // gray-600
+          DEFAULT: '#6b7280',
         },
         background: {
           DEFAULT: 'var(--background)',

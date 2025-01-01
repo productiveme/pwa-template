@@ -1,9 +1,6 @@
 import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
 import { VitePWA } from 'vite-plugin-pwa'
-import dotenv from 'dotenv'
-
-dotenv.config()
 
 export default defineConfig({
   server: {
@@ -15,9 +12,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'yzerfontein-app',
-        short_name: 'yzerfontein-app',
-        theme_color: 'red',
+        name: 'Modern PWA',
+        short_name: 'PWA',
+        theme_color: '#ffffff',
         icons: [
           {
             src: '/icon-192x192.png',
