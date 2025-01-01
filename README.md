@@ -30,7 +30,18 @@ cd my-pwa-app
 npm install
 ```
 
-3. Start development server:
+3. Run the setup wizard:
+```bash
+npm run setup
+```
+The setup wizard will help you customize your PWA by configuring:
+- Project name
+- Project description
+- Author name
+- Theme colors
+- PWA settings
+
+4. Start development server:
 ```bash
 npm run dev
 ```
@@ -52,6 +63,7 @@ npm run dev
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
+- `npm run setup` - Run the PWA setup wizard
 
 ## GraphQL Integration
 
