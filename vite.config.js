@@ -4,7 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
   server: {
-    port: process.env.PORT || 3000,
+    port: parseInt(process.env.VITE_PORT || 3000),
   },
   root: "./client",
   plugins: [
@@ -49,4 +49,5 @@ export default defineConfig({
       },
     }),
   ],
+  envDir: '../'
 });

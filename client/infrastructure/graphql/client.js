@@ -1,14 +1,18 @@
-import { createClient, defaultExchanges, subscriptionExchange } from '@urql/preact'
+import { createClient } from '@urql/preact'
 import { createClient as createWSClient } from 'graphql-ws'
+import { subscriptionExchange } from '@urql/core'
+import { cacheExchange, fetchExchange } from '@urql/core'
+import { config } from '../../config'
 
 const wsClient = createWSClient({
-  url: 'ws://localhost:4000/graphql'
+  url: config.graphqlWsUrl
 })
 
 export const client = createClient({
-  url: 'http://localhost:4000/graphql',
+  url: config.graphqlHttpUrl,
   exchanges: [
-    ...defaultExchanges,
+    cacheExchange,
+    fetchExchange,
     subscriptionExchange({
       forwardSubscription: operation => ({
         subscribe: sink => ({
