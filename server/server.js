@@ -1,92 +1,33 @@
-import { createServer } from "node:http";
-import { createYoga } from "graphql-yoga";
-import { useServer } from "graphql-ws/lib/use/ws";
-import { WebSocketServer } from "ws";
-import { makeExecutableSchema } from "@graphql-tools/schema";
-import { typeDefs } from "./schema.js";
-import { db } from "./db.js";
-import { createPubSub } from "graphql-yoga";
+import config from './config/index.js';
+import { db } from './db.js';
+import { typeDefs } from './schema.js';
+import createPubSubService from './infrastructure/pubsub.js';
+import createPostService from './services/post.service.js';
+import createCommentService from './services/comment.service.js';
+import createPostController from './controllers/post.controller.js';
+import createCommentController from './controllers/comment.controller.js';
+import createResolvers from './resolvers.js';
+import createGraphQLServer from './infrastructure/server.js';
 
-const PORT = process.env.VITE_PORT_GQL || 3002;
+// Initialize services
+const pubSub = createPubSubService();
+const postService = createPostService(db);
+const commentService = createCommentService(db, pubSub);
 
-const pubSub = createPubSub();
+// Initialize controllers
+const postController = createPostController(postService, commentService);
+const commentController = createCommentController(commentService);
 
-const resolvers = {
-  Query: {
-    posts: () => db.posts,
-    post: (_, { id }) => db.posts.find((post) => post.id === id),
-  },
+// Create resolvers
+const resolvers = createResolvers({ postController, commentController });
 
-  Post: {
-    comments: (post) =>
-      db.comments.filter((comment) => comment.postId === post.id),
-  },
-
-  Mutation: {
-    addPost: (_, { title, content }) => {
-      const post = {
-        id: String(db.posts.length + 1),
-        title,
-        content,
-      };
-      db.posts.push(post);
-      return post;
-    },
-
-    addComment: (_, { postId, text }) => {
-      const comment = {
-        id: String(db.comments.length + 1),
-        text,
-        postId,
-      };
-      db.comments.push(comment);
-      pubSub.publish(`POST_${postId}_NEW_COMMENT`, { newComment: comment });
-      return comment;
-    },
-  },
-
-  Subscription: {
-    newComment: {
-      subscribe: (_, { postId }) => ({
-        [Symbol.asyncIterator]: () =>
-          pubSub.subscribe(`POST_${postId}_NEW_COMMENT`),
-      }),
-    },
-  },
-};
-
-const schema = makeExecutableSchema({ typeDefs, resolvers });
-
-const yoga = createYoga({
-  schema,
-  graphiql: {
-    subscriptionsProtocol: "WS",
-  },
-  cors: {
-    origin: '*',
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    methods: ['POST', 'GET', 'OPTIONS']
-  },
-  landingPage: false,
-  multipart: true
+// Initialize server
+const server = createGraphQLServer({
+  typeDefs,
+  resolvers,
+  config,
+  context: { pubSub }
 });
 
-const server = createServer(yoga);
-
-const wsServer = new WebSocketServer({
-  server,
-  path: yoga.graphqlEndpoint,
-});
-
-useServer(
-  {
-    schema,
-    context: () => ({ pubSub }),
-  },
-  wsServer,
-);
-
-server.listen(PORT, () => {
-  console.log(`🚀 GraphQL Server ready at http://localhost:${PORT}/graphql`);
-});
+// Start server
+server.start();
