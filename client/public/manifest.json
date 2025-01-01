@@ -1,9 +1,9 @@
 {
-  "name": "yzerfontein-app",
-  "short_name": "yzerfontein-app",
-  "description": "Yzerfontein Business Directory",
-  "theme_color": "red",
-  "background_color": "green",
+  "name": "Modern PWA",
+  "short_name": "PWA",
+  "description": "Modern PWA with Preact",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone",
   "start_url": "/",
   "icons": [
