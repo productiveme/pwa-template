@@ -7,7 +7,7 @@ import { typeDefs } from "./schema.js";
 import { db } from "./db.js";
 import { createPubSub } from "graphql-yoga";
 
-const PORT = process.env.PORT_GQL || 3001;
+const PORT = process.env.VITE_PORT_GQL || 3002;
 
 const pubSub = createPubSub();
 
@@ -62,9 +62,18 @@ const yoga = createYoga({
   graphiql: {
     subscriptionsProtocol: "WS",
   },
+  cors: {
+    origin: '*',
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['POST', 'GET', 'OPTIONS']
+  },
+  landingPage: false,
+  multipart: true
 });
 
 const server = createServer(yoga);
+
 const wsServer = new WebSocketServer({
   server,
   path: yoga.graphqlEndpoint,
@@ -79,5 +88,5 @@ useServer(
 );
 
 server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}/graphql`);
+  console.log(`🚀 GraphQL Server ready at http://localhost:${PORT}/graphql`);
 });
