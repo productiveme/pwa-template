@@ -5,7 +5,7 @@ A modern Progressive Web App template built with Preact, GraphQL, and Vite. This
 ## Features
 
 - ⚡️ **Vite** - Lightning fast build tool
-- 🔄 **PWA Support** - Full Progressive Web App capabilities
+- 🔄 **PWA Support** - Full Progressive Web App capabilities with install prompt
 - ⚛️ **Preact** - Lightweight React alternative
 - 📱 **Responsive Layout** - Mobile-first design with Tailwind CSS
 - 🚀 **GraphQL** - Full GraphQL setup with queries, mutations, and subscriptions
@@ -13,49 +13,37 @@ A modern Progressive Web App template built with Preact, GraphQL, and Vite. This
 - 🎯 **Routing** - Client-side routing with Wouter
 - 💅 **Styling** - Tailwind CSS for utility-first styling
 - 🔌 **Offline Support** - Service worker and offline functionality
-
-## Quick Start
-
-1. Clone this template:
-```bash
-# Create a new project using this template
-npx degit productiveme/pwa-template my-pwa-app
-
-# Navigate to project directory
-cd my-pwa-app
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Run the setup wizard:
-```bash
-npm run setup
-```
-The setup wizard will help you customize your PWA by configuring:
-- Project name
-- Project description
-- Author name
-- Theme colors
-- PWA settings
-
-4. Start development server:
-```bash
-npm run dev
-```
+- 🏗️ **Clean Architecture** - Functional approach with clear separation of concerns
 
 ## Project Structure
 
 ```
 ├── client/
-│   ├── domain/         # Business logic and state management
-│   ├── infrastructure/ # External services integration (GraphQL, etc.)
-│   └── presentation/   # UI components and pages
-├── server/            # GraphQL server implementation
-├── public/            # Static assets
+│   ├── config/           # App configuration
+│   ├── domain/          # Business logic and state management
+│   ├── infrastructure/  # Technical implementations
+│   └── presentation/    # UI components and pages
+├── server/
+│   ├── config/         # Server configuration
+│   ├── services/       # Core business logic
+│   ├── controllers/    # Request handlers
+│   ├── infrastructure/ # Server setup and technical implementations
+│   └── schema.js       # GraphQL schema
 └── package.json
+```
+
+## Quick Start
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start development server:
+
+```bash
+npm run dev
 ```
 
 ## Available Scripts
@@ -63,57 +51,47 @@ npm run dev
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
-- `npm run setup` - Run the PWA setup wizard
-
-## GraphQL Integration
-
-The template includes a full GraphQL setup with:
-- Queries for data fetching
-- Mutations for data modifications
-- Real-time subscriptions
-- Built-in GraphQL dev tools
-
-Example query:
-```graphql
-query GetPosts {
-  posts {
-    id
-    title
-  }
-}
-```
-
-## PWA Features
-
-This template includes:
-- Service Worker for offline support
-- Manifest for installability
-- Workbox for caching strategies
-- Push notification support
-
-## Customization
-
-1. Update `client/config.js` with your API endpoints
-2. Modify `vite.config.js` for build configuration
-3. Update PWA settings in `vite-plugin-pwa` configuration
-4. Customize Tailwind theme in `tailwind.config.js`
-
-## Best Practices
-
-- Keep components small and focused
-- Use GraphQL fragments for reusable queries
-- Implement proper error boundaries
-- Follow the container/presenter pattern
-- Use TypeScript for better type safety
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues
+- `npm run format` - Format code with Prettier
 
 ## Environment Variables
 
 Create a `.env` file in the root:
 
 ```env
+VITE_APP_NAME="Modern PWA"
 VITE_PORT=3001
 VITE_PORT_GQL=3002
 ```
+
+## Architecture
+
+The project follows a functional clean architecture approach:
+
+- **No classes** - Uses plain functions and factory functions
+- **Dependency Injection** - Via factory functions and closures
+- **Pure Functions** - Where possible for predictable behavior
+- **Immutability** - Returns frozen objects to prevent mutations
+- **Clear Separation** - Distinct layers for different concerns
+- **Testability** - Easy to test with injectable dependencies
+
+## PWA Features
+
+- Installable as standalone app
+- Works offline
+- Smart install prompt with persistence
+- Push notification support
+- Automatic updates
+
+## Styling
+
+Uses Tailwind CSS with:
+
+- Custom color scheme
+- Dark mode support
+- Responsive design
+- Component-based styles
 
 ## License
 
