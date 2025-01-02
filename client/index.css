@@ -32,10 +32,10 @@
   }
 
   .btn-primary {
-    @apply bg-primary px-4 py-2 rounded-md text-white hover:opacity-80 transition-colors;
+    @apply bg-primary px-4 py-2 rounded-md text-white hover:bg-primary-hover transition-colors;
   }
 
   .btn-secondary {
-    @apply bg-secondary px-4 py-2 rounded-md text-white hover:opacity-80 transition-colors;
+    @apply bg-secondary px-4 py-2 rounded-md text-white hover:bg-secondary-hover transition-colors;
   }
 }

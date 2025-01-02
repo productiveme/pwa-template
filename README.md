@@ -35,13 +35,11 @@ A modern Progressive Web App template built with Preact, GraphQL, and Vite. This
 ## Quick Start
 
 1. Install dependencies:
-
 ```bash
 npm install
 ```
 
 2. Start development server:
-
 ```bash
 npm run dev
 ```
@@ -87,7 +85,6 @@ The project follows a functional clean architecture approach:
 ## Styling
 
 Uses Tailwind CSS with:
-
 - Custom color scheme
 - Dark mode support
 - Responsive design
